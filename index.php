@@ -140,6 +140,35 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     </div>
                 </section>
 
+                <!-- Coupon List View (Full Screen) -->
+                <section id="view-coupon-list" class="view">
+                    <div class="card">
+                        <div class="card-header flex">
+                            <h2 id="coupon-list-title">쿠폰발행조회</h2>
+                            <button class="btn" onclick="backToEvents()">◀ 돌아가기</button>
+                        </div>
+                        <div class="search-bar" style="margin-bottom: 1.5rem;">
+                            <input type="text" id="coupon-list-search-full" placeholder="고객명 또는 연락처로 검색..."
+                                onkeyup="searchCouponsInFullView()">
+                        </div>
+                        <div class="table-wrapper">
+                            <table id="full-coupon-table">
+                                <thead>
+                                    <tr>
+                                        <th>고객명</th>
+                                        <th>연락처</th>
+                                        <th>쿠폰번호</th>
+                                        <th>상태</th>
+                                        <th>발행일</th>
+                                        <th>만료일</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Issue View -->
                 <section id="view-issue" class="view">
                     <div class="card narrow">
@@ -253,33 +282,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         </div>
     </div>
 
-    <!-- Coupon List Modal -->
-    <div id="coupon-list-modal" class="modal">
-        <div class="modal-content extra-large">
-            <div class="modal-header">
-                <h2>쿠폰 발행 현황 조회</h2>
-                <button class="close-btn" onclick="closeModal('coupon-list-modal')">&times;</button>
-            </div>
-            <div class="search-bar" style="margin-bottom: 1.5rem;">
-                <input type="text" id="coupon-list-search" placeholder="고객명 또는 연락처로 검색..."
-                    onkeyup="searchCouponsInModal()">
-            </div>
-            <div class="table-wrapper scrollable" style="max-height: 400px; overflow-y: auto;">
-                <table id="modal-coupon-table">
-                    <thead>
-                        <tr>
-                            <th>고객명</th>
-                            <th>연락처</th>
-                            <th>쿠폰번호</th>
-                            <th>상태</th>
-                            <th>발행일</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
     <script>lucide.createIcons();</script>

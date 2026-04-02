@@ -222,20 +222,42 @@ function editEvent(id) {
         });
 }
 
-let currentEventIdForList = 0;
+let currentEventIdForDetails = 0;
+
 function viewEventCoupons(id) {
-    currentEventIdForList = id;
-    document.getElementById('coupon-list-search').value = '';
-    fetchCouponsForModal(id, '');
-    openModal('coupon-list-modal');
+    currentEventIdForDetails = id;
+
+    // Hide all views
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    // Show coupon list view
+    const listView = document.getElementById('view-coupon-list');
+    if (listView) listView.classList.add('active');
+
+    document.getElementById('coupon-list-search-full').value = '';
+
+    // Update title
+    fetch('api.php?action=get_event&id=' + id)
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('coupon-list-title').innerText = `[${data.event.event_name}] 쿠폰 발행 현황`;
+            }
+        });
+
+    fetchCouponsForFullView(id, '');
 }
 
-function fetchCouponsForModal(id, query) {
+function backToEvents() {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-events').classList.add('active');
+}
+
+function fetchCouponsForFullView(id, query) {
     fetch(`api.php?action=get_coupons_by_event&id=${id}&q=${encodeURIComponent(query)}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                const tbody = document.querySelector('#modal-coupon-table tbody');
+                const tbody = document.querySelector('#full-coupon-table tbody');
                 tbody.innerHTML = '';
                 data.coupons.forEach(c => {
                     const statusClass = c.status === 'ISSUED' ? 'status-issued' : 'status-used';
@@ -247,6 +269,7 @@ function fetchCouponsForModal(id, query) {
                         <td><code>${c.coupon_code}</code></td>
                         <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                         <td>${c.issued_at.split(' ')[0]}</td>
+                        <td>${c.expiration_date}</td>
                     </tr>
                 `;
                 });
@@ -254,10 +277,14 @@ function fetchCouponsForModal(id, query) {
         });
 }
 
-function searchCouponsInModal() {
-    const q = document.getElementById('coupon-list-search').value;
-    fetchCouponsForModal(currentEventIdForList, q);
+function searchCouponsInFullView() {
+    const q = document.getElementById('coupon-list-search-full').value;
+    fetchCouponsForFullView(currentEventIdForDetails, q);
 }
+
+window.viewEventCoupons = viewEventCoupons;
+window.backToEvents = backToEvents;
+window.searchCouponsInFullView = searchCouponsInFullView;
 
 function copyToClipboard() {
     const copyText = document.getElementById('copy-text');
