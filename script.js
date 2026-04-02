@@ -270,6 +270,7 @@ function fetchCouponsForFullView(id, query) {
                         <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                         <td>${c.issued_at.split(' ')[0]}</td>
                         <td>${c.expiration_date}</td>
+                        <td>${c.used_at || '-'}</td>
                     </tr>
                 `;
                 });
@@ -310,6 +311,8 @@ function verifyCoupon() {
                 const statusText = cp.status === 'ISSUED' ? '사용가능(발행완료)' : '사용완료(할인적용됨)';
                 const useBtn = cp.status === 'ISSUED' ? `<button onclick="useCoupon('${cp.coupon_code}')" class="btn btn-primary btn-large" style="margin-top: 1.5rem">할인권 사용 처리하기</button>` : '';
 
+                const usageRow = cp.status === 'USED' && cp.used_at ? `<p><strong>사용일자:</strong> ${cp.used_at}</p>` : '';
+
                 resultArea.innerHTML = `
                 <div class="verify-detail">
                     <h3 style="margin-bottom: 1rem">조회 결과: <span class="status-badge ${statusClass}">${statusText}</span></h3>
@@ -317,6 +320,7 @@ function verifyCoupon() {
                     <p><strong>고객명:</strong> ${cp.customer_name}</p>
                     <p><strong>연락처:</strong> ${cp.phone_number}</p>
                     <p><strong>유효기간:</strong> ${cp.expiration_date} 까지</p>
+                    ${usageRow}
                     ${useBtn}
                 </div>
             `;

@@ -1,5 +1,6 @@
 <?php
 // db.php
+date_default_timezone_set('Asia/Seoul');
 $host = 'localhost';
 $db = 'bitnami_discount';
 $user = 'root';
@@ -15,6 +16,7 @@ $options = [
 
 try {
      $pdo = new PDO($dsn, $user, $pass, $options);
+     $pdo->exec("SET time_zone = '+09:00';");
 } catch (\PDOException $e) {
      throw new \PDOException($e->getMessage(), (int) $e->getCode());
 }

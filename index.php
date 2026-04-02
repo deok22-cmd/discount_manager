@@ -161,6 +161,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                         <th>상태</th>
                                         <th>발행일</th>
                                         <th>만료일</th>
+                                        <th>사용일자</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

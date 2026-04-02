@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텐트깔끄미 프로그램 - 업무 포털</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --primary-light: #40916c;
+            --bg: #f8f9fa;
+            --text: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e9f5ee 0%, #f1f8f5 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.05rem;
+        }
+
+        header p {
+            color: #636e72;
+            font-size: 1.1rem;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(45, 106, 79, 0.15);
+            border-color: var(--primary-light);
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: #e9f5ee;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .icon-box {
+            background: var(--primary);
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .tool-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        .tool-card p {
+            color: #636e72;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .badge {
+            margin-top: auto;
+            padding: 0.4rem 0.8rem;
+            background: #f1f3f5;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #495057;
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            margin-top: auto;
+            padding-top: 4rem;
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>텐트깔끄미 프로그램</h1>
+        <p>내부 업무 효율화를 위한 통합 도구 포털</p>
+    </header>
+
+    <div class="portal-grid">
+        <!-- 1. 할인권 시스템 -->
+        <a href="/discount/" class="tool-card">
+            <div class="icon-box"><i data-lucide="ticket"></i></div>
+            <h3>할인권 발행 및 관리</h3>
+            <p>이벤트별 할인권 발행, 실시간 사용 조회 및 검증 처리 시스템</p>
+            <span class="badge">최근 업데이트</span>
+        </a>
+
+        <!-- 2. 네이버 포스팅 (추측) -->
+        <a href="/CS/" class="tool-card">
+            <div class="icon-box"><i data-lucide="message-square"></i></div>
+            <h3>CS 관리 도구</h3>
+            <p>고객 문의 대응 및 상담 내역 관리 시스템</p>
+            <span class="badge">운영 중</span>
+        </a>
+
+        <!-- 3. 검색 도구 -->
+        <a href="/Search/" class="tool-card">
+            <div class="icon-box"><i data-lucide="search"></i></div>
+            <h3>통합 검색 도구</h3>
+            <p>내부 데이터 및 외부 정보 수집 검색</p>
+            <span class="badge">운영 중</span>
+        </a>
+
+        <!-- 4. 기타 도구 -->
+        <div class="tool-card" style="opacity: 0.6; cursor: default;">
+            <div class="icon-box"><i data-lucide="plus-circle"></i></div>
+            <h3>준비 중</h3>
+            <p>신규 업무용 프로그램이 곧 추가될 예정입니다.</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 텐트깔끄미. All rights reserved.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
